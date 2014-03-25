@@ -1,12 +1,17 @@
 /*
 	Para compilar el archivo de estylus abrimos el Terminal y vamos
-	a la carpeta en la cual esta uvicado el archivo .styl
+	a la carpeta del proyecto donde esta uvicada la carpeta que
+	contiene el archivo .styl
 
-	MacBook:stylus MacBook$ stylus -c -w -o css/ stylus/estilos.styl
+	MacBook:MySfotipy MacBook$ stylus -c -w -o css/ stylus/estilos.styl
 
 		-c	comprimir
 		-o	setear uvicacion del .css
 		-w	watch (compilacion automatica)
+
+	El comando css/ indica al compilador que cargue el archivo .styl de
+	la carpeta "stylus" y guarde el archivo resultante (.css) en la
+	carpeta llamada "css". Esto permite mantener el directorio en orden
 */
 
 @import "normalize.styl"
@@ -15,6 +20,7 @@
 // Creacion de variables
 gris_oscuro = #333333
 gris_claro = #818181
+gris_mas_claro = #F0F0F0
 rojo = #BD255B
 
 body
@@ -26,6 +32,9 @@ figure
 	margin 0
 img
 	vertical-align top
+ul
+	margin 0
+	padding 0
 // Buttons
 .button-menu
 	color gris_oscuro
@@ -68,6 +77,15 @@ img
 	padding 1em
 .padding-tb
 	padding 1em 0
+.left
+	float left
+.right
+	float right
+.wrap
+	width 1000px
+.round
+	border-radius 50%
+	overflow hidden
 .progress
 	margin 1em
 	position relative
@@ -131,13 +149,124 @@ img
 		margin-right 0
 	p
 		margin .5em 0
-
 .playing
 	&.small
 		width 20em
+		margin 0 auto
+.playlist
+	width 22em
+	padding 0 2em
+	display none
+	border-left 1px solid gris_claro
+	.list
+		list-style none
+	.item
+		padding 1em 0
+	.action
+		font-size 14px
+.isotipo
+	width 122px
+.logo
+	padding 1.3em 0
+	overflow hidden
+	background white
+	display none
+.avatar
+	width 38px
+	height 38px
+.username
+	color gris_claro
+	position relative
+	top 9px
+	margin-left .5em
+	// pseudo-elemento para triangulo
+	&:after
+		// siempre hay que colocar content
+		border-left 7px solid transparent
+		border-right 7px solid transparent
+		border-top 9px solid gris_claro
+		content ""
+		display inline-block
+		margin-left .4em
 
 
-// Media Queries para responsive design
+// Media Query para Tablet
 @media screen and (min-width:480px)
+	.song
+		&:nth-child(even)
+			margin-right 1em
+	.image
+		img
+			width 100%
+			height auto
+	.playing
+		&.medium
+			width auto
+	.input
+		border 1px solid gris_claro
+		height 2.5em
+		border-radius 5px
+		padding 0 1em 0 2em
+	.search-icon
+		position absolute
+		left .5em
+		top .8em
+		color gris_claro
+	.close-icon
+		position absolute
+		top .5em
+		color gris_claro
+		right .5em
+		font-size 1.2em
+
+
+// Media Query para Desktop
+@media screen and (min-width:1000px)
 	body
-		background red
+		background gris_mas_claro
+	.button-menu
+		display none
+	.playing
+		padding-top 1.3em
+		&.large
+			margin 0 auto
+			width 62.5em
+			overflow hidden
+	.menu
+		display block
+		overflow hidden
+		background gris_mas_claro
+		border-top 1px solid gris_claro
+		.item
+			float left
+			list-style none
+			a
+				color gris_oscuro
+				text-transform uppercase
+				cursor pointer
+				padding 1em
+				display block
+				border-top 5px solid transparent
+				&:hover
+					border-top 5px solid gris_claro
+	.music
+		width 32.5em
+		float left
+		.description
+			display none
+	.header
+		height auto
+		border none
+		.title
+			display none
+	.logo
+	.playlist
+		display block
+
+
+
+
+
+
+
+
