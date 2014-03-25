@@ -3,19 +3,55 @@
 	a la carpeta del proyecto donde esta uvicada la carpeta que
 	contiene el archivo .styl
 
-	MacBook:MySfotipy MacBook$ stylus -c -w -o css/ stylus/estilos.styl
+		$ stylus -c -w -o css/ stylus/estilos.styl
 
-		-c	comprimir
-		-o	setear uvicacion del .css
-		-w	watch (compilacion automatica)
+			-c	comprimir
+			-w	watch (compilacion automatica)
+			-o	setear uvicacion del .css
 
 	El comando css/ indica al compilador que cargue el archivo .styl de
 	la carpeta "stylus" y guarde el archivo resultante (.css) en la
 	carpeta llamada "css". Esto permite mantener el directorio en orden
+
+	====================================================================
+
+	Si se desea usar nib, la sintaxis sera la siguiente:
+
+		$ stylus -u nib -c -w -o css/ stylus/estilos.styl
+
+			-u	usar mixins
+			nib complemento de Stylus
+
+	====================================================================
+
+	nib, entre otras cosas, crea mixins de Stylus para generar
+	automaticamente las lineas de codigo compatibles con cada navegador
+
+	Ejemplo:
+	
+		Escribimos en el .styl	->	animation n
+			
+		Obtenemos en el .css	->	-webkit-animation n
+									-moz-animation n
+									-ms-animation n
+									-o-animation n
+									animation n
+			
 */
 
 @import "normalize.styl"
 @import "fonts.styl"
+@import "nib"
+
+// Mixin de Stylus
+/*
+animacion(n)
+	-webkit-animation n
+	-moz-animation n
+	-ms-animation n
+	-o-animation n
+	animation n
+*/
 
 // Creacion de variables
 gris_oscuro = #333333
@@ -110,6 +146,8 @@ ul
 		height 5px
 		width 30%
 		position relative
+		// Animacion barra reproduccion
+		animation 30s state infinite linear
 	.circle
 		background gris_oscuro
 		border-radius 50%
@@ -118,6 +156,8 @@ ul
 		position absolute
 		right 0
 		top -3px
+		// Animacion punto barra reproduccion
+		animation 1s circle infinite
 .name
 	color gris_oscuro
 .author
@@ -188,6 +228,20 @@ ul
 		content ""
 		display inline-block
 		margin-left .4em
+
+
+// Animaciones con CSS
+@keyframes state
+	0%
+		width 0
+	100%
+		width 100%
+@keyframes circle
+	0%
+		transform scale(1)
+	100%
+		transform scale(2)
+		opacity 0
 
 
 // Media Query para Tablet
